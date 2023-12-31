@@ -1,9 +1,9 @@
 const puppeteer = require('puppeteer');
 
 const getJobDescription = async page => {
-  const target='div.descriptionstyles__DescriptionContainer-sc-13ve12b-0.iCEVUR>div';
+  const target = 'div.descriptionstyles__DescriptionContainer-sc-13ve12b-0.iCEVUR>div';
   await page.waitForSelector(target);
-  console.log('Okiiiiiiiiiiiiii');
+
   const jobDescription = await page.evaluate((target) => {
     return document.querySelector(target).innerText;
   }, target);
@@ -42,19 +42,22 @@ const getJobDescription = async page => {
   //   page.click('.hYqokn > span'),
   //   page.waitForNavigation()
   // ]);
-  
-  
+
+
   const jobs = await page.$$('h3 > a.sc-gAjuZT.cUPTNR');
-  console.log(jobs);
-  jobs[0].click();
-  await new Promise(r => setTimeout(r, 4000));
-  
-  const jobDescription = await getJobDescription(page);
-  console.log(jobDescription);
-  
-  // for (const job in jobs) {
-  //   console.log('job: ' + job);
-  // }
+  // console.log(jobs);
+  // jobs[0].click();
+  // await new Promise(r => setTimeout(r, 4000));
+
+  for (const job in jobs) {
+    console.log('------------------------------------------------------------------------');
+    console.log('job: ' + job);
+    jobs[job].click();
+    await new Promise(r => setTimeout(r, 4000));
+
+    const jobDescription = await getJobDescription(page);
+    console.log(jobDescription);
+  }
 
   // const allJobs = await page.evaluate(() => {
   //   const jobs = document.querySelectorAll('h3 > a.sc-gAjuZT');
@@ -121,7 +124,7 @@ const getJobDescription = async page => {
   // await new Promise(r => setTimeout(r, 5000));
 
   await new Promise(r => setTimeout(r, 7000));
-  // await browser.close();
+  await browser.close();
 })();
 
 // https://www.youtube.com/watch?v=tLIqYdKhwSc
