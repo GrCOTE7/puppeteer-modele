@@ -1,13 +1,19 @@
 const puppeteer = require('puppeteer');
 
-const getJobDescription = async page => {
-  const target = 'div.descriptionstyles__DescriptionContainer-sc-13ve12b-0.iCEVUR>div';
-  await page.waitForSelector(target);
-
-  const jobDescription = await page.evaluate((target) => {
-    return document.querySelector(target).innerText;
-  }, target);
-  return jobDescription;
+const getJobInfos = async page => {
+  const targetTitle = 'h2.headerstyle__JobViewHeaderTitle-sc-1ijq9nh-5.gmZFGf.JobViewTitle';
+  const targetDesc = 'div.descriptionstyles__DescriptionContainer-sc-13ve12b-0.iCEVUR>div';
+  await page.waitForSelector(targetDesc);
+  const title = await page.evaluate((targetTitle) => {
+    return document.querySelector(targetTitle).innerText;
+  }, targetTitle);
+  const description = await page.evaluate((targetDesc) => {
+    return document.querySelector(targetDesc).innerText;
+  }, targetDesc);
+  return {
+    title,
+    description
+  }
 }
 (async () => {
   // console.log('oki');
@@ -50,13 +56,15 @@ const getJobDescription = async page => {
   // await new Promise(r => setTimeout(r, 4000));
 
   for (const job in jobs) {
-    console.log('------------------------------------------------------------------------');
+    console.log('-'.repeat(128));
     console.log('job: ' + job);
     jobs[job].click();
     await new Promise(r => setTimeout(r, 4000));
-
-    const jobDescription = await getJobDescription(page);
-    console.log(jobDescription);
+    
+    const jobInfos = await getJobInfos(page);
+    console.log(jobInfos.title);
+    console.log('-'.repeat(64));
+    console.log(jobInfos.description);
   }
   
   await page.evaluate(() => window.scrollBy(0, 100));
@@ -89,7 +97,7 @@ const getJobDescription = async page => {
 
 
   await new Promise(r => setTimeout(r, 7000));
-  await browser.close();
+  // await browser.close();
 })();
 
 // https://www.youtube.com/watch?v=tLIqYdKhwSc
