@@ -2,8 +2,8 @@ const puppeteer = require('puppeteer');
 const nodemailer = require("nodemailer");
 require("dotenv").config();
 
-// const url = "https://www.cdiscount.com/informatique/achat-pc-ordinateur/pc-de-bureau-gamer-medion-erazer-engineer-p10-md35/f-1070853-auc4061275197914.html#mpos=0|cd";
-const url = "https://www.cdiscount.com/informatique/achat-pc-ordinateur/vist-kit-gaming-ryzen-7-5700g-ram-32go-rx-vega/f-1070853-vis1698399165507.html#mpos=0|mp";
+const url = "https://www.cdiscount.com/informatique/achat-pc-ordinateur/pc-de-bureau-gamer-medion-erazer-engineer-p10-md35/f-1070853-auc4061275197914.html#mpos=0|cd";
+// const url = "https://www.cdiscount.com/informatique/achat-pc-ordinateur/vist-kit-gaming-ryzen-7-5700g-ram-32go-rx-vega/f-1070853-vis1698399165507.html#mpos=0|mp";
 
 (async () => {
  const browser = await puppeteer.launch({
@@ -11,8 +11,10 @@ const url = "https://www.cdiscount.com/informatique/achat-pc-ordinateur/vist-kit
   defaultViewport: null
  });
  const page = await browser.newPage();
- await page.setViewport({ width: 1780, height: 8000 })
+ // await page.setViewport({ width: 1780, height: 8000 })
  await page.goto(url, { waitUntil: "networkidle2" });
+ 
+ await page.click('#footer_tc_privacy_button_2');
 
  // const price = await page.$eval('fpPrice price priceColor jsMainPrice jsProductPrice hideFromPro', el => el.innerText);
 
@@ -37,27 +39,32 @@ const url = "https://www.cdiscount.com/informatique/achat-pc-ordinateur/vist-kit
 
  if (parseInt(result['price']) < 800) {
   console.log('Price is less than 800 !');
-  sendNotification(result['price']);
+  // sendNotification(result['price']);
  }
 
-//  async function sendNotification(price) {
-//   let transporter = nodemailer.createTransport({
-//    service: "gmail",
-//    auth: {
-//     user: process.env.MAIL_USER,
-//     pass: process.env.MAIL_PASS,
-//    },
-//   });
+ async function sendNotification(price) {
+  let transporter = nodemailer.createTransport({
+   service: "gmail",
+   auth: {
+    user: process.env.MAIL_USER,
+    pass: process.env.MAIL_PASS,
+   },
+   tls: {
+    rejectUnauthorized: false, // Désactiver la vérification du certificat SSL
+   }
+  });
 
-//   let info = await transporter
-//    .sendMail({
-//     from: '"PC Cdiscount" <julien.azbrg@gmail.com>',
-//     to: "GrCOTE7@gmail.com",
-//     subject: "Prix sous les " + price + "€",
-//     html: "Le prix de la tour est de " + price + "€",
-//    })
-//    .then(() => console.log("Message envoyé"));
-//  }
+  let info = await transporter
+   .sendMail({
+    from: 'PC Cdiscount <' + process.env.MAIL_USER + '>',
+    to: process.env.MAIL_USER,
+    subject: "Prix à " + price + "€",
+    html: "Le prix de la tour est de <b>" + price + "€</b>",
+   })
+   .then(() => console.log("Message envoyé"));
+
+  console.log(info);
+ }
 
 
  // let bodyHTML = await page.evaluate(() => document.body.innerHTML);
