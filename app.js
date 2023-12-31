@@ -58,36 +58,9 @@ const getJobDescription = async page => {
     const jobDescription = await getJobDescription(page);
     console.log(jobDescription);
   }
-
-  // const allJobs = await page.evaluate(() => {
-  //   const jobs = document.querySelectorAll('h3 > a.sc-gAjuZT');
-  //   console.log(jobs);
-  //   // jobs[1].click();
-  //   let allJobs = [];
-  //   for (job in jobs) {
-  //     console.log('job: ' + job);
-  //     allJobs.push(job);
-  //   }
-  //   return Promise.resolve(allJobs);
-  // });
-  // console.log('allJob1: ' + allJobs[2]);
-
-
-  // const jobs = await page.evaluate(()=> document.querySelectorAll('.sc-gAjuZT.cUPTNR'));
-  // console.log('jobs: '+jobs);
-
+  
   await page.evaluate(() => window.scrollBy(0, 100));
   await new Promise(r => setTimeout(r, 5000));
-
-  // const jobDescription = await getJobDescription(page);
-  // console.log(jobDescription);
-
-  // for (const job of jobs) {
-  //   console.log('Job = '+ job);
-  // }
-
-
-
 
   // const aHandle = await page.evaluate(() => 2);
   // console.log(aHandle);
@@ -114,14 +87,6 @@ const getJobDescription = async page => {
   // await page.type(searchInput, 'developpeur react', { delay: 350 });
   // await new Promise(r => setTimeout(r, 5000));
 
-
-  // // document.querySelector('button > span > div');
-  // const search = 'button[aria-label="Rechercher"]';
-  // // const search = 'ul > li > button';
-  // await new Promise(r => setTimeout(r, 8000));
-  // await page.waitForSelector(search, {visible: true});
-  // await page.click(search);
-  // await new Promise(r => setTimeout(r, 5000));
 
   await new Promise(r => setTimeout(r, 7000));
   await browser.close();
