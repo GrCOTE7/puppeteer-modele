@@ -57,31 +57,37 @@ const getJobInfos = async page => {
   const results = [];
   const target = 'h3 > a.sc-gAjuZT.cUPTNR';
   const jobs = await page.$$(target);
-  
+
   const urls = await page.$$eval(target, els => {
     return els.map(e=>e.href)
   });
   
   for (const job in jobs) {
+    // get url #1
+    // const url = await page.$eval(target, el => el.href);
+    
+    // const urls = await page.$$eval(target, els => {
+    //   return els.map(e=>e.href)
+    // });
     // let uuu = document.querySelector('h3 > a.sc-gAjuZT.cUPTNR');
-    // console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'+(document.querySelector('[href]')));
+    console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'+(document.querySelector('[href]')));
     console.log('-'.repeat(128));
     jobs[job].click();
     // console.log ('cliiiiiiiiiiicked', jobs[job].url);
     await new Promise(r => setTimeout(r, 2000));
 
-    const jobInfos = await getJobInfos(page);
-    
+    // const jobInfos = await getJobInfos(page);
 
-    // const jobUuu = await page.evaluate(el => {
-    //   if (el) {
-    //     return el.innerText;
-    //   }
-    //   return '';
-    // }, job);
-    console.log('job ' + job + ': ' + jobInfos.title);
-    console.log('-'.repeat(64));
-    console.log(jobInfos.description);
+
+    // // const jobUuu = await page.evaluate(el => {
+    // //   if (el) {
+    // //     return el.innerText;
+    // //   }
+    // //   return '';
+    // // }, job);
+    // console.log('job ' + job + ': ' + jobInfos.title);
+    // console.log('-'.repeat(64));
+    // console.log(jobInfos.description);
     // console.log('jobUuu: ' + jobUuu);
 
     results.push({
@@ -91,10 +97,10 @@ const getJobInfos = async page => {
     });
   }
 
-  await page.evaluate(() => window.scrollBy(0, 100));
-  await new Promise(r => setTimeout(r, 5000));
+  // await page.evaluate(() => window.scrollBy(0, 100));
+  // await new Promise(r => setTimeout(r, 5000));
 
-  console.log('-'.repeat(128) + 'Results: ' + '-'.repeat(119));
+  // console.log('-'.repeat(128) + 'Results: ' + '-'.repeat(119));
   console.log(results);
 
   // const aHandle = await page.evaluate(() => 2);
