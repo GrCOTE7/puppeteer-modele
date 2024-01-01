@@ -87,7 +87,7 @@ const getJobInfos = async page => {
     results.push({
       title: jobInfos.title,
       // description: jobInfos.description,
-      url: urls[job]
+      url: urls[job].slice(0,90)
     });
   }
 
@@ -95,7 +95,7 @@ const getJobInfos = async page => {
   await new Promise(r => setTimeout(r, 5000));
 
   console.log('-'.repeat(128) + 'Results: ' + '-'.repeat(119));
-  console.log(results);
+  console.table(results);
 
   // const aHandle = await page.evaluate(() => 2);
   // console.log(aHandle);
@@ -124,7 +124,7 @@ const getJobInfos = async page => {
 
 
   await new Promise(r => setTimeout(r, 7000));
-  // await browser.close();
+  await browser.close();
 })();
 
 // https://www.youtube.com/watch?v=tLIqYdKhwSc
