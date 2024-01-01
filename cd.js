@@ -35,7 +35,7 @@ const url = "https://www.cdiscount.com/informatique/achat-pc-ordinateur/pc-de-bu
   };
  });
 
- console.log(result);
+ console.table(result);
 
  if (parseInt(result['price']) < 800) {
   console.log('Price is less than 800 !');

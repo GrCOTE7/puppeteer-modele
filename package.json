@@ -3,11 +3,13 @@
     "dotenv": "^8.2.0",
     "express": "^4.18.2",
     "nodemailer": "^6.5.0",
+    "path": "^0.12.7",
     "puppeteer": "^21.6.1"
   },
   "name": "puppeteer-modele",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "go": "node app.js"
   },
