@@ -57,36 +57,13 @@ export function amazon() {
         const price = await page.evaluate(el => el.innerText, priceHdl);
 
         console.log({ index, title, price });
+        pdts.push({ index, title, price });
       }
     }
 
-    // console.log(Eee);
-    // (e) => {
-
-    // const productsList = [products];
-    // await page.waitForSelector(targetTitle);
-    // const productsEls = await page.$$(productsTargets);
-
-    // productsEls.forEach((productEl) => {
-    //   const titleTarget = 'h2>a>span';
-    //   const titleElt = productEl.querySelector(titleTarget);
-    //   const priceTarget = '.a-price .a-offscreen';
-    //   const priceElt = productEl.querySelector(priceTarget);
-    //   if (titleElt && priceElt) {
-    //     const title = titleElt.innerText.trim();
-    //     const price = priceElt.innerText.trim();
-    //     productsList.push({ title, price });
-    //   }
-    // });
-
-    //   return productsList;
-    // });
-
-    // const p0 = page.e
-
-    // console.log(pdts);
 
     console.log('Oki: ' + pdts.length + ' products')
+    console.table(pdts);
     // await browser.close();
   })();
 }
