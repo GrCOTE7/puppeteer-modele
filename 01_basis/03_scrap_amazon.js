@@ -21,26 +21,43 @@ export function amazon() {
     const pdtsTgs = '.s-result-item';
     const nameTarget = 'h2>a>span';
     const priceTarget = '.a-price .a-offscreen';
+    const imgTarget = '.s-image';
 
     const pdtsHdls = await page.$$(pdtsTgs);
 
-    let nameO = null;
-    let price = 'Null';
-    let img = 'Null';
+    let name = null;
+    let price = null;
+    let img = null;
     let i = 0;
 
     for (const pdtHdl of pdtsHdls) {
 
       try {
         name = await page.evaluate(
-          (el, nameTarget) => el.querySelector(nameTarget).textContent.substring(0, 140),
+          (el, nameTarget) => el.querySelector(nameTarget).textContent.substring(0, 15),
           pdtHdl, nameTarget
         );
       } catch (error) {
       }
+      
+      try {
+        price = await page.evaluate(
+          (el, priceTarget) => el.querySelector(priceTarget).textContent,
+          pdtHdl, priceTarget
+        );
+      } catch (error) {
+      }
+      
+      try {
+        img = await page.evaluate(
+          (el, imgTarget) => el.querySelector(imgTarget).getAttribute('src'),
+          pdtHdl, imgTarget
+        );
+      } catch (error) {
+      }
 
-      if (name) {
-        pdts.push({ i, name });
+      if (name && price && img) {
+        pdts.push({ i, name, price, img });
         i++;
       }
     }
