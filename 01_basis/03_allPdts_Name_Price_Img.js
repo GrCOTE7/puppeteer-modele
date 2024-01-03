@@ -34,29 +34,26 @@ export function amazon() {
 
       try {
         name = await page.evaluate(
-          (el, nameTarget) => el.querySelector(nameTarget).textContent.substring(0, 15),
+          (el, nameTarget) => el.querySelector(nameTarget).textContent.substring(0, 70),
           pdtHdl, nameTarget
         );
-      } catch (error) {
-      }
-      
+      } catch (error) { }
+
       try {
         price = await page.evaluate(
           (el, priceTarget) => el.querySelector(priceTarget).textContent,
           pdtHdl, priceTarget
         );
-      } catch (error) {
-      }
-      
+      } catch (error) { }
+
       try {
         img = await page.evaluate(
           (el, imgTarget) => el.querySelector(imgTarget).getAttribute('src'),
           pdtHdl, imgTarget
         );
-      } catch (error) {
-      }
+      } catch (error) { }
 
-      if (name && price && img) {
+      if (name) {
         pdts.push({ i, name, price, img });
         i++;
       }

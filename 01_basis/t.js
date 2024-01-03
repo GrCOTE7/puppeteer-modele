@@ -1,20 +1,11 @@
-export function amazon() {
- const pdts = () => {
-  const champs = ['name', 'price'];
-  const pdtsE = [];
+export function test() {
 
-  const names = ['Pdt 1 ', 'Pdt 2 '];
-  const prices = [10, 20];
+ let i = 1;
+ do {
+  console.log(i++);
+ } while (i < 8 && 0)
 
-  champs.forEach((champ, index) => {
-   let pdt = {
-    name: names[index],
-    price: prices[index],
-   }
-   pdtsE.push(pdt);
-  });
 
-  return pdtsE;
- }
- console.table(pdts());
 };
+
+test();
