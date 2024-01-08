@@ -10,15 +10,16 @@ export function testIfRobot(filename) {
   console.log(filePath);
 
   (async () => {
-   
+
    puppeteer.use(StealthPlugin());
-   
+
    const browser = await puppeteer.launch({
-    // headless: false,
+    headless: false,
     // slowMo: 200,
     // defaultViewport: false,
     // userDataDir: './tmp',
     // devtools: true
+    executablePath:"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
    });
    console.log('Running test...');
    const page = await browser.newPage();
@@ -26,7 +27,7 @@ export function testIfRobot(filename) {
    await new Promise(r => setTimeout(r, 5000));
    await page.screenshot({ path: filePath, fullPage: true });
 
-   console.log('Oki.')
+   console.log('Screenshot done.')
    await browser.close();
   })()
 
