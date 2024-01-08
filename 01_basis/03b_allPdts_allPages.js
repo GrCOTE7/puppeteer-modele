@@ -1,4 +1,6 @@
 import puppeteer from "puppeteer";
+//2do Add csv saving
+//2do Use a cluster → Others files
 
 export function amazon() {
   (async () => {
