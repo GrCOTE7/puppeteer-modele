@@ -1,9 +1,35 @@
 import { createJson } from './classes/createJson.js';
 import { saveJson } from './classes/saveJson.js';
+import { testIfRobot } from './classes/testIfRobot.js';
 export function test() {
- const pdtsJson = createJson();
- console.log(pdtsJson);
- saveJson(pdtsJson, 'pdts');
+ 
+ 
+ testIfRobot('robot');
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ // const pdtsJson = createJson();
+ // console.log(pdtsJson);
+ // saveJson(pdtsJson, 'pdts');
 };
 
 test();
