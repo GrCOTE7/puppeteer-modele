@@ -1,18 +1,13 @@
 import { createJson } from './classes/createJson.js';
 import { saveJson } from './classes/saveJson.js';
 import { testIfRobot } from './classes/testIfRobot.js';
+import { myProxy } from './classes/myProxy.js';
 export function test() {
  
  
- testIfRobot('robot');
- 
- 
- 
- 
- 
- 
- 
- 
+ // testIfRobot('robot');
+  
+ myProxy();
  
  
  

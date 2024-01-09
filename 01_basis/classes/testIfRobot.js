@@ -20,8 +20,13 @@ export function testIfRobot(filename) {
             // userDataDir: './tmp',
             // devtools: true
             // See chrome parameters in chrome'url: chrome://version
-            executablePath: "C:/Program Files/Google/Chrome/Application/chrome.exe", 
-            userDataDir: "C:/Users/utilisateur/AppData/Local/Google/Chrome/User Data/Default"
+            executablePath: "C:/Program Files/Google/Chrome/Application/chrome.exe",
+            userDataDir: "C:/Users/utilisateur/AppData/Local/Google/Chrome/User Data/Default",
+            args: [
+               // '--proxy-server=socks5://127.0.0.1:9876',
+               // '--no-sandbox',
+               // '--disable-setuid-sandbox'
+            ],
          });
          console.log('Running test...');
          const page = await browser.newPage();
@@ -32,7 +37,8 @@ export function testIfRobot(filename) {
          console.log('Screenshot done.')
          await browser.close();
       })()
-
    }
    test();
 }
+
+// testIfRobot('test');
